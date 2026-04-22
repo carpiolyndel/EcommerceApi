@@ -153,28 +153,28 @@ Test cases performed:
 ## 📸 API Testing Screenshots
 
 ### 🔹 Get All Products
-![Get All](screenshots/get-all.png)
+![Get All](testing/get-all.png)
 
 ### 🔹 Get Product by ID
-![Get By ID](screenshots/get-by-id.png)
+![Get By ID](testing/get-by-id.png)
 
 ### 🔹 Create Product
-![POST](screenshots/post.png)
+![POST](testing/post.png)
 
 ### 🔹 Update Product
-![PUT](screenshots/put.png)
+![PUT](testing/put.png)
 
 ### 🔹 Delete Product
-![DELETE](screenshots/delete.png)
+![DELETE](testing/delete.png)
 
 ### 🔹 Filter by Category
-![Category](screenshots/filter-price.png)
+![Category](testing/filter-price.png)
 
 ### 🔹 Filter by Price
-![Price](screenshots/filter-price.png)
+![Price](testing/filter-price.png)
 
 ### 🔹 Error Handling (404)
-![Error](screenshots/error-404.png)
+![Error](testing/error-404.png)
 
 ---
 
