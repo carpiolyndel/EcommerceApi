@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Account - OFF!®</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/account.css">
+</head>
+<body>
+<header>
+    <img src="/images/logo.jpg" alt="OFF!® Products Logo">
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/products.html">Products</a></li>
+            <li><a href="/cart.html">Cart</a></li>
+            <li><a href="/account.html">Account</a></li>
+            <li><a href="/index.html">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <div class="user-header">
+        <h1 id="welcome-message">Welcome, Guest!</h1>
+        <nav class="account-nav">
+            <ul>
+                <li><a href="#order-history" id="order-history-link">Order History</a></li>
+                <li><a href="#profile" id="profile-link">Profile Settings</a></li>
+                <li><a href="#wishlist" id="wishlist-link">Wishlist</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <h2>Previous Purchases</h2>
+    <div id="orders-container">
+        <div class="loading">Loading order history...</div>
+    </div>
+
+    <h3>Order History Summary</h3>
+    <ul class="order-history" id="order-history-list">
+    </ul>
+</main>
+
+<footer>
+    <p>&copy; 2026 Carpio & Cebuano® Products. All rights reserved.</p>
+</footer>
+
+<div id="message-container"></div>
+<script src="/js/script.js"></script>
+
+</body>
+</html>

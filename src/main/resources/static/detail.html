@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Details - OFF!®</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/details.css">
+</head>
+<body>
+<header>
+    <img src="/images/logo.jpg" alt="OFF!® Products Logo">
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/products.html">Products</a></li>
+            <li><a href="/cart.html">Cart</a></li>
+            <li><a href="/account.html">Account</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <div id="product-detail-container">
+        <div class="loading">Loading product details...</div>
+    </div>
+
+    <section class="review">
+        <h2>Customer Reviews</h2>
+        <div id="reviews-container">
+            <!-- Reviews will be loaded dynamically -->
+        </div>
+
+        <form class="review-form" id="review-form">
+            <h3>Write a Review</h3>
+            <div class="form-group">
+                <label for="rating">Rating:</label>
+                <select id="rating" name="rating">
+                    <option value="5">5 - Excellent</option>
+                    <option value="4">4 - Very Good</option>
+                    <option value="3">3 - Good</option>
+                    <option value="2">2 - Fair</option>
+                    <option value="1">1 - Poor</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="review-text">Your Review:</label>
+                <textarea id="review-text" name="review" rows="4" placeholder="Write your review here..."></textarea>
+            </div>
+            <button type="submit">Submit Review</button>
+        </form>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2026 Carpio & Cebuano® Products. All rights reserved.</p>
+</footer>
+
+<div id="message-container"></div>
+<script src="/js/script.js"></script>
+</body>
+</html>

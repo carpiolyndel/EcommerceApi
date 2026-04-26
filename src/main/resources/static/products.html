@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Products - OFF!®</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/product.css">
+</head>
+<body>
+<header>
+    <img src="/images/logo.jpg" alt="OFF!® Products Logo">
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/products.html">Products</a></li>
+            <li><a href="/cart.html">Cart</a></li>
+            <li><a href="/account.html">Account</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <aside class="sidebar">
+        <h3>Filter Products</h3>
+        <form id="filter-form">
+            <fieldset>
+                <legend>Price Range</legend>
+                <label>
+                    <input type="radio" name="price" value="under-10">
+                    Under ₱10
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="price" value="10-15">
+                    ₱10 - ₱15
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="price" value="above-15">
+                    Above ₱15
+                </label>
+            </fieldset>
+
+            <fieldset>
+                <legend>Category</legend>
+                <label>
+                    <input type="radio" name="category" value="spray">
+                    Spray
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="category" value="lotion">
+                    Lotion
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="category" value="wipes">
+                    Wipes
+                </label>
+            </fieldset>
+
+            <button type="submit">Apply Filters</button>
+            <button type="button" id="clear-filters">Clear Filters</button>
+        </form>
+    </aside>
+
+    <section class="products-container" id="products-container">
+        <div class="loading">Loading products from database...</div>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2026 Carpio & Cebuano® Products. All rights reserved.</p>
+</footer>
+
+<div id="message-container"></div>
+<script src="/js/script.js"></script>
+</body>
+</html>
