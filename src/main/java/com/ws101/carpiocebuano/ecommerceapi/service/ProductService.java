@@ -1,134 +1,49 @@
 package com.ws101.carpiocebuano.ecommerceapi.service;
 
 import com.ws101.carpiocebuano.ecommerceapi.model.Product;
+import com.ws101.carpiocebuano.ecommerceapi.repository.ProductRepository;
 import org.springframework.stereotype.Service;
+import java.util.List;
 
-import java.util.*;
-import java.util.concurrent.atomic.AtomicLong;
-
-/**
- * Service class for product-related operations.
- *
- * Provides business logic for managing products using in-memory storage.
- * Acts as an intermediary between controller and data.
- *
- * @see Product
- */
 @Service
 public class ProductService {
 
-    private final List<Product> productList = new ArrayList<>();
-    private final AtomicLong idCounter = new AtomicLong();
+    private final ProductRepository productRepository;
 
-    /**
-     * Initializes product list with sample data.
-     */
-    public ProductService() {
-        for (int i = 1; i <= 10; i++) {
-            productList.add(new Product(
-                    idCounter.incrementAndGet(),
-                    "Product " + i,
-                    "Description " + i,
-                    10.0 * i,
-                    "Category" + (i % 3),
-                    5 + i,
-                    "https://example.com/img" + i
-            ));
-        }
+    public ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
     }
 
-    /**
-     * Retrieves all products.
-     *
-     * @return list of products
-     */
     public List<Product> getAllProducts() {
-        return productList;
+        return productRepository.findAll();
     }
 
-    /**
-     * Finds a product by ID.
-     *
-     * @param id product ID
-     * @return optional product
-     */
-    public Optional<Product> getProductById(Long id) {
-        return productList.stream()
-                .filter(p -> p.getId().equals(id))
-                .findFirst();
+    public Product getProductById(Long id) {
+        return productRepository.findById(id).orElse(null);
     }
 
-    /**
-     * Creates a new product.
-     *
-     * @param product product to create
-     * @return created product
-     */
     public Product createProduct(Product product) {
-        product.setId(idCounter.incrementAndGet());
-        productList.add(product);
-        return product;
+        return productRepository.save(product);
     }
 
-    /**
-     * Updates an existing product.
-     *
-     * @param id product ID
-     * @param product updated product data
-     * @return updated product if found
-     */
-    public Optional<Product> updateProduct(Long id, Product product) {
-        return getProductById(id).map(existing -> {
-            existing.setName(product.getName());
-            existing.setDescription(product.getDescription());
-            existing.setPrice(product.getPrice());
-            existing.setCategory(product.getCategory());
-            existing.setStockQuantity(product.getStockQuantity());
-            existing.setImageUrl(product.getImageUrl());
-            return existing;
-        });
+    public Product updateProduct(Long id, Product updatedProduct) {
+        updatedProduct.setId(id);
+        return productRepository.save(updatedProduct);
     }
 
-    /**
-     * Deletes a product by ID.
-     *
-     * @param id product ID
-     * @return true if deleted
-     */
-    public boolean deleteProduct(Long id) {
-        return productList.removeIf(p -> p.getId().equals(id));
+    public void deleteProduct(Long id) {
+        productRepository.deleteById(id);
     }
 
-    /**
-     * Filters products by category.
-     *
-     * @param category category name
-     * @return list of matching products
-     */
     public List<Product> filterByCategory(String category) {
-        List<Product> result = new ArrayList<>();
-        for (Product p : productList) {
-            if (p.getCategory().equalsIgnoreCase(category)) {
-                result.add(p);
-            }
-        }
-        return result;
+        return productRepository.findByCategory(category);
     }
 
-    /**
-     * Filters products by price range.
-     *
-     * @param min minimum price
-     * @param max maximum price
-     * @return list of matching products
-     */
-    public List<Product> filterByPrice(double min, double max) {
-        List<Product> result = new ArrayList<>();
-        for (Product p : productList) {
-            if (p.getPrice() >= min && p.getPrice() <= max) {
-                result.add(p);
-            }
-        }
-        return result;
+    public List<Product> filterByPriceRange(Double min, Double max) {
+        return productRepository.findByPriceBetween(min, max);
+    }
+
+    public List<Product> filterByName(String name) {
+        return productRepository.findByNameContainingIgnoreCase(name);
     }
 }
