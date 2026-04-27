@@ -1,22 +1,23 @@
 /* ========================================
-   LABORATORY 2 & 3
+   GLOBAL STYLES - OFF!® Products
+   ALL ROOT VARIABLES AND RESPONSIVE HERE
    ======================================== */
 
-/* ========== LAB 2 TASK 1: CSS VARIABLES ========== */
+/* ========== ROOT VARIABLES ========== */
 :root {
-    --primary-color: #2c3e50;
-    --accent-color:  #007bff;
-    --accent-2: #e67e22;
+    --primary-color: #ff6600;
+    --accent-color: #ff9933;
+    --hover-color: #e05500;
     --success: #28a745;
-    --danger: #d9534f;
-    --bg-light: #f4f4f4;
-    --muted-bg: #f5f5f5;
+    --danger: #dc3545;
+    --danger-bg: #ffe0e0;
+    --bg-light: #f5f5f5;
+    --muted-bg: #f9f9f9;
     --text-main: #333333;
-    --text-secondary: #555555;
-    --hover-color: #ff6600;
+    --text-secondary: #666666;
     --border: #dddddd;
     --white: #ffffff;
-    --danger-bg: rgba(217,83,79,0.08);
+    --dark: #2c3e50;
 }
 
 /* ========== BASE RESET ========== */
@@ -34,13 +35,7 @@ body {
     line-height: 1.6;
 }
 
-
-/* Button Active Effect */
-button:active {
-    transform: scale(0.98);
-}
-
-/* ========== LAB 2 TASK 1: TYPOGRAPHY ========== */
+/* ========== TYPOGRAPHY ========== */
 h1, h2, h3 {
     font-family: 'Georgia', 'Times New Roman', serif;
     color: var(--primary-color);
@@ -57,7 +52,7 @@ p {
 }
 
 a {
-    color: var(--accent-color);
+    color: var(--primary-color);
     text-decoration: none;
     transition: all 0.3s ease;
 }
@@ -67,11 +62,11 @@ a:hover {
     text-decoration: underline;
 }
 
-/* ========== LAB 2 TASK 2: BUTTON STYLES ========== */
+/* ========== BUTTON STYLES ========== */
 button, .btn {
     font-family: inherit;
     font-weight: bold;
-    background-color: var(--accent-color);
+    background-color: var(--primary-color);
     color: white;
     border: none;
     border-radius: 5px;
@@ -80,211 +75,71 @@ button, .btn {
     transition: all 0.3s ease;
 }
 
-.product-price::before,
-.price::before,
-.item-price::before,
-.item-total::before {
-    content: "₱";
-    margin-right: 2px;
-}
-
 button:hover, .btn:hover {
     background-color: var(--hover-color);
     transform: translateY(-2px);
 }
 
 button:active, .btn:active {
-    transform: scale(0.95);
+    transform: scale(0.98);
 }
 
-button:focus, .btn:focus {
-    outline: 3px solid var(--accent-color);
-    outline-offset: 2px;
-}
-
-/* ========== LAB 3 TASK 5: FLUID IMAGES ========== */
-img {
-    max-width: 100%;
-    height: auto;
-}
-
-/* ========== LAB 2 TASK 4: FORM VALIDATION ========== */
-input:required {
-    border-left: 4px solid var(--accent-color);
-}
-
-input:required:valid {
-    border-left-color: var(--success);
-}
-
-/* ========== LAB 3 TASK 1: MOBILE FIRST (0-480px) ========== */
-
-/* Header - Mobile */
+/* ========== HEADER ========== */
 header {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    padding: 20px;
+    padding: 20px 50px;
     background-color: var(--white);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    width: auto;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 header img {
-    width: 80px;
-    margin-bottom: 10px;
+    height: 50px;
 }
 
-/* Navigation - Mobile */
 nav ul {
-    list-style: none;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-    width: 100%;
+    list-style: none;
+    gap: 30px;
 }
 
-nav ul li {
-    width: 100%;
-    text-align: center;
-}
-
-nav ul li a {
-    display: block;
-    padding: 8px 12px;
-    color: var(--text-main);
-    font-weight: bold;
-    border-radius: 4px;
-    transition: all 0.3s ease;
-}
-
-nav ul li a:hover {
-    background-color: var(--hover-color);
-    color: var(--white);
+nav a {
     text-decoration: none;
+    color: var(--dark);
+    font-weight: bold;
+    transition: color 0.3s;
 }
 
-/* Main Content - Mobile */
-main {
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
+nav a:hover {
+    color: var(--primary-color);
 }
 
-/* Footer - Mobile */
+/* ========== FOOTER ========== */
 footer {
     text-align: center;
-    padding: 20px;
-    background-color: var(--primary-color);
+    padding: 30px;
+    background-color: var(--dark);
     color: white;
-    margin-top: 30px;
+    margin-top: 60px;
 }
 
 footer p {
     color: white;
 }
 
-/* ========== LAB 3 TASK 1: TABLET (481px - 768px) ========== */
-@media (min-width: 481px) and (max-width: 768px) {
-    h1 { font-size: 2.2rem; }
-    h2 { font-size: 2rem; }
-    
-    /* Header - Tablet */
-    header {
-        flex-direction: row;
-        justify-content: space-between;
-        padding: 15px 30px;
-    }
-    
-    header img {
-        width: 70px;
-        margin-bottom: 0;
-    }
-    
-    /* Navigation - Tablet */
-    nav ul {
-        flex-direction: row;
-        width: auto;
-        gap: 10px;
-    }
-    
-    nav ul li {
-        width: auto;
-    }
-
-    .cart-item {
-        flex-wrap: wrap;
-    }
-    
-    .item-details {
-        min-width: 150px;
-    }
-    
-    .item-quantity {
-        margin-left: auto;
-    }
+/* ========== MESSAGE CONTAINER ========== */
+#message-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
 }
 
-/* ========== LAB 3 TASK 1: DESKTOP (769px and above) ========== */
-@media (min-width: 769px) {
-    h1 { font-size: 2.5rem; }
-    h2 { font-size: 2.2rem; }
-    h3 { font-size: 1.5rem; }
-    
-    /* Header - Desktop */
-    header {
-        flex-direction: row;
-        justify-content: space-between;
-        padding: 20px 50px;
-        width: auto;
-    }
-    
-    header img {
-        width: 90px;
-    }
-    
-    /* Navigation - Desktop */
-    nav ul {
-        flex-direction: row;
-        gap: 20px;
-        width: auto;
-    }
-    
-    nav ul li {
-        width: auto;
-    }
-
-    .cart-content {
-        display: grid;
-        grid-template-columns: 1fr 350px;
-        gap: 30px;
-    }
-    
-    .cart-summary {
-        position: sticky;
-        top: 100px;
-        height: fit-content;
-    }
-}
-
-footer {
-    margin-top: auto;
-    width: 100%;
-    background-color: var(--primary-color);
-    color: white;
-    text-align: center;
-    padding: 20px;
-    position: relative;
-    bottom: 0;
-}
-
-footer p {
-    margin: 0;
-    color: white;
-}
-
-/* ========== LAB 3 TASK 7: ANIMATIONS ========== */
+/* ========== ANIMATIONS ========== */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -297,88 +152,56 @@ footer p {
 }
 
 @keyframes pulse {
-    0% {
-        transform: scale(1);
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* ========== RESPONSIVE DESIGN - MOBILE FIRST ========== */
+
+/* Mobile (max 480px) */
+@media (max-width: 480px) {
+    header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
     }
-    50% {
-        transform: scale(1.05);
+
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
     }
-    100% {
-        transform: scale(1);
-    }
-}
 
-.cart-item {
-    animation: fadeIn 0.5s ease;
-}
+    h1 { font-size: 1.5rem; }
+    h2 { font-size: 1.3rem; }
+    h3 { font-size: 1.1rem; }
 
-.checkout-btn:hover {
-    animation: pulse 0.5s ease;
-}
-
-
-/* ========== New Added the Error Message ========== */
-
-/* Error Styles */
-.error {
-    border-color: #d9534f !important;
-    background-color: rgba(217,83,79,0.08) !important;
-}
-
-.error-message {
-    color: #d9534f;
-    font-size: 0.85rem;
-    margin-top: 5px;
-    display: block;
-    animation: fadeIn 0.3s ease;
-}
-
-/* Animation Styles */
-.fade-in {
-    animation: fadeIn 0.5s ease;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    main {
+        padding: 15px;
     }
 }
 
-/* Cart Styles */
-.cart-badge {
-    transition: all 0.3s ease;
+/* Tablet (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+    header {
+        padding: 15px 30px;
+    }
+
+    nav ul {
+        gap: 15px;
+    }
+
+    h1 { font-size: 1.8rem; }
+    h2 { font-size: 1.5rem; }
 }
 
-.cart-item {
-    display: flex;
-    align-items: center;
-    padding: 15px;
-    border-bottom: 1px solid #eee;
-}
+/* Desktop (769px and above) */
+@media (min-width: 769px) {
+    header {
+        padding: 20px 50px;
+    }
 
-.empty-cart-message {
-    text-align: center;
-    padding: 40px;
-    color: #666;
-    font-size: 1.1rem;
-}
-
-.no-products {
-    text-align: center;
-    padding: 60px;
-    font-size: 1.2rem;
-    color: #666;
-    grid-column: 1 / -1;
-}
-
-.order-item-cart {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px solid #eee;
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.75rem; }
 }

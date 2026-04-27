@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Checkout - OFF!®</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/checkout.css">
 </head>
@@ -78,20 +79,33 @@
                     <section class="payment">
                         <h2>Payment Method</h2>
                         <div class="payment-options">
-                            <label>
-                                <input type="radio" name="payment" value="credit-card" required>
-                                Credit Card
-                            </label>
-                            <label>
-                                <input type="radio" name="payment" value="paypal">
-                                PayPal
-                            </label>
-                            <label>
-                                <input type="radio" name="payment" value="gcash">
-                                GCash / Debit Card
-                            </label>
+                            <div class="payment-option">
+                                <label>
+                                    <input type="radio" name="payment" value="credit-card" required>
+                                    <i class="fas fa-credit-card" style="color: #ff6600; width: 24px;"></i>
+                                    <span class="payment-label">Credit Card</span>
+                                    <span class="payment-description">Visa, Mastercard, Amex</span>
+                                </label>
+                            </div>
+                            <div class="payment-option">
+                                <label>
+                                    <input type="radio" name="payment" value="paypal">
+                                    <i class="fab fa-paypal" style="color: #0070ba; width: 24px;"></i>
+                                    <span class="payment-label">PayPal</span>
+                                    <span class="payment-description">Pay with your PayPal account</span>
+                                </label>
+                            </div>
+                            <div class="payment-option">
+                                <label>
+                                    <input type="radio" name="payment" value="gcash">
+                                    <i class="fas fa-mobile-alt" style="color: #28a745; width: 24px;"></i>
+                                    <span class="payment-label">GCash / Debit Card</span>
+                                    <span class="payment-description">Pay via GCash or Debit Card</span>
+                                </label>
+                            </div>
                         </div>
                     </section>
+
                 </form>
             </section>
         </div>

@@ -1,20 +1,19 @@
 /* ========================================
-   LABORATORY 2 & 3: LANDING PAGE ONLY
-   FIXED HERO COLORS
+   LANDING PAGE STYLES
    ======================================== */
 
-/* ========== LAB 3 TASK 4: HERO SECTION FLEXBOX ========== */
+/* Hero Section */
 .hero {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 60px 20px;
-    background-color: var(--primary-color);
+    padding: 80px 20px;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
     border-radius: 12px;
     margin: 20px auto 40px;
-    max-width: 1500px;
+    max-width: 1200px;
     min-height: 400px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
@@ -24,8 +23,6 @@
     margin-bottom: 20px;
     color: var(--white);
     text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-    font-weight: bold;
-    line-height: 1.2;
 }
 
 .hero p {
@@ -33,97 +30,34 @@
     margin-bottom: 30px;
     color: rgba(255,255,255,0.9);
     max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-    line-height: 1.6;
 }
 
-.hero .btn {
-    background-color: var(--accent-color);
-    color: var(--white);
-    padding: 15px 40px;
-    font-size: 1.2rem;
+.hero button {
+    background-color: var(--white);
+    color: var(--primary-color);
+    padding: 12px 30px;
+    font-size: 1.1rem;
     font-weight: bold;
     border: none;
     border-radius: 50px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    box-shadow: 0 4px 15px rgba(230,126,34,0.4);
-    display: inline-block;
+    transition: all 0.3s;
 }
 
-.hero .btn:hover {
-    background-color: var(--hover-color);
+.hero button:hover {
     transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(255,102,0,0.5);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
-.hero .btn:active {
-    transform: translateY(-1px);
-}
-
-/* ========== LAB 3 TASK 7: ANIMATIONS ========== */
-@keyframes slideInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.05);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-.hero h1 {
-    animation: slideInLeft 0.8s ease;
-}
-
-.hero p {
-    animation: fadeIn 0.8s ease 0.2s both;
-}
-
-.hero .btn {
-    animation: fadeIn 0.8s ease 0.4s both;
-}
-
-.hero .btn:hover {
-    animation: pulse 0.5s ease;
-}
-
-/* ========== SECTION HEADERS ========== */
+/* Section Headers */
 .featured-products h2,
 .discounted-products h2 {
     text-align: center;
     margin: 40px 0 30px;
-    position: relative;
-    padding-bottom: 10px;
     font-size: 2rem;
     color: var(--primary-color);
+    position: relative;
+    padding-bottom: 10px;
 }
 
 .featured-products h2::after,
@@ -135,54 +69,37 @@
     transform: translateX(-50%);
     width: 80px;
     height: 3px;
-    background-color: var(--accent-color);
+    background-color: var(--primary-color);
 }
 
-/* ========== PRODUCT LIST ========== */
+/* Product List Grid */
 .product-list {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 5px;
-    justify-content: center;
-    margin: 0 auto 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
     max-width: 1200px;
-    padding: 0 15px;
+    margin: 0 auto 40px;
+    padding: 0 20px;
 }
 
-/* ========== LAB 2 TASK 3: PRODUCT CARDS ========== */
+/* Product Cards */
 .product-card {
-    flex: 0 0 auto;
-    width: 100%;
-    max-width: 280px;
-    margin: 0;
-    padding: 20px;
-    border: 1px solid var(--border);
+    background: var(--white);
     border-radius: 10px;
-    background-color: var(--white);
+    padding: 20px;
     text-align: center;
     transition: all 0.3s ease;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-}
-
-.product-card:nth-child(odd) {
-    background-color: #f9f9f9;
-}
-
-.product-card:nth-child(even) {
-    background-color: var(--white);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .product-card:hover {
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
 }
 
 .product-card img {
     width: 100%;
-    height: 180px;
+    height: 200px;
     object-fit: cover;
     border-radius: 8px;
     margin-bottom: 15px;
@@ -192,39 +109,49 @@
     font-size: 1.2rem;
     margin-bottom: 10px;
     color: var(--primary-color);
-    min-height: 50px;
 }
 
 .product-card p {
     color: var(--text-secondary);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     margin-bottom: 15px;
-    min-height: 40px;
-    flex: 1;
 }
 
-/* ========== LAB 2 TASK 4: PRICE PSEUDO-ELEMENT ========== */
-.price {
-    font-weight: bold;
-    color: var(--primary-color);
+.product-card .price {
     font-size: 1.3rem;
-    margin: 10px 0;
-    display: block;
-}
-
-.discount {
-    color: var(--danger);
-    background-color: var(--danger-bg);
-    padding: 3px 8px;
-    border-radius: 3px;
-    margin-left: 5px;
-    font-size: 0.85rem;
     font-weight: bold;
+    color: var(--success);
     display: inline-block;
+    margin-bottom: 10px;
 }
 
+.product-card .discount {
+    background-color: var(--danger);
+    color: white;
+    padding: 3px 8px;
+    border-radius: 5px;
+    font-size: 0.75rem;
+    margin-left: 8px;
+}
+
+.product-card button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.product-card button:hover {
+    background-color: var(--hover-color);
+}
+
+/* Sale Badge */
 .discounted-products .product-card {
-    border: 2px solid var(--accent-color);
+    border: 2px solid var(--primary-color);
     position: relative;
     overflow: hidden;
 }
@@ -234,16 +161,84 @@
     position: absolute;
     top: 10px;
     right: -30px;
-    background: var(--accent-color);
+    background: var(--primary-color);
     color: white;
     padding: 5px 40px;
     transform: rotate(45deg);
     font-size: 0.75rem;
     font-weight: bold;
-    letter-spacing: 1px;
     z-index: 1;
+}
+
+/* Loading and Empty States */
+.loading {
+    text-align: center;
+    padding: 50px;
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    grid-column: 1 / -1;
+}
+
+/* Animations */
+.hero h1 {
+    animation: slideInLeft 0.8s ease;
+}
+
+.hero p {
+    animation: fadeIn 0.8s ease 0.2s both;
+}
+
+.hero button {
+    animation: fadeIn 0.8s ease 0.4s both;
 }
 
 .product-card {
     animation: fadeIn 0.6s ease;
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Landing Page Responsive */
+@media (max-width: 768px) {
+    .hero {
+        margin: 15px;
+        padding: 50px 15px;
+    }
+
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .featured-products h2,
+    .discounted-products h2 {
+        font-size: 1.5rem;
+    }
+
+    .product-list {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .product-list {
+        grid-template-columns: 1fr;
+    }
+
+    .hero h1 {
+        font-size: 1.5rem;
+    }
 }
