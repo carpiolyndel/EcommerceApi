@@ -132,8 +132,9 @@ Test cases performed:
 This project successfully implements a RESTful API based on the requirements of Laboratory 7. All CRUD operations and filtering features are working properly.
 
 ---
-
----
+#
+#
+#
 
 # Laboratory 8 - Database Integration and Fetch API
 
