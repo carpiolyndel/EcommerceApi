@@ -1,36 +1,34 @@
-<!-- ============================================ -->
-<!-- LABORATORY 7 CONTENT                         -->
-<!-- ============================================ -->
 # 🛒 E-Commerce API
-
-## 📌 Project Overview
-
-This project is a RESTful API built using Spring Boot for our Laboratory 7.
-It simulates a simple e-commerce backend where products can be created, viewed, updated, and deleted.
-
-The goal of this project is to demonstrate:
-
-* HTTP methods (GET, POST, PUT, DELETE)
-* REST API design
-* Proper status codes
-* In-memory data storage (no database)
-
----
 
 ## 👨‍💻 Authors
 
-* Carpio, Lyndel J.
-* Cebuano, Irene
+- Carpio, Lyndel J.
+- Cebuano, Irene A.
+
+---
+
+# Laboratory 7 - HTTP Fundamentals and Spring Boot
+
+## 📌 Project Overview
+
+This project is a RESTful API built using Spring Boot for our Laboratory 7. It simulates a simple e-commerce backend where products can be created, viewed, updated, and deleted.
+
+The goal of this project is to demonstrate:
+
+- HTTP methods (GET, POST, PUT, DELETE)
+- REST API design
+- Proper status codes
+- In-memory data storage (no database)
 
 ---
 
 ## ⚙️ Technologies Used
 
-* Java 25
-* Spring Boot 4.0.5
-* Spring Web
-* Lombok
-* Gradle
+- Java 25
+- Spring Boot 4.0.5
+- Spring Web
+- Lombok
+- Gradle
 
 ---
 
@@ -40,7 +38,7 @@ The goal of this project is to demonstrate:
 2. Make sure Java 25 is installed
 3. Run the application:
 
-```
+```bash
 ./gradlew bootRun
 ```
 
@@ -54,35 +52,17 @@ http://localhost:8080/api/products
 
 ## 📡 API Endpoints
 
-### 🔹 Get All Products
+| Method | Endpoint | Description | Status Code |
+|--------|----------|-------------|-------------|
+| GET | `/api/products` | Get all products | 200 OK |
+| GET | `/api/products/{id}` | Get product by ID | 200 OK / 404 |
+| POST | `/api/products` | Create new product | 201 Created |
+| PUT | `/api/products/{id}` | Update product | 200 OK / 404 |
+| DELETE | `/api/products/{id}` | Delete product | 204 No Content |
+| GET | `/api/products/filter/category?category={name}` | Filter by category | 200 OK |
+| GET | `/api/products/filter/price?min={min}&max={max}` | Filter by price | 200 OK |
 
-```
-GET /api/products
-```
-
-Returns all products
-Status: 200 OK
-
----
-
-### 🔹 Get Product by ID
-
-```
-GET /api/products/{id}
-```
-
-Returns a specific product
-Status: 200 OK / 404 Not Found
-
----
-
-### 🔹 Create Product
-
-```
-POST /api/products
-```
-
-Sample Request Body:
+### Sample POST Request
 
 ```json
 {
@@ -95,46 +75,6 @@ Sample Request Body:
 }
 ```
 
-Status: 201 Created
-
----
-
-### 🔹 Update Product
-
-```
-PUT /api/products/{id}
-```
-
-Updates the entire product
-Status: 200 OK / 404 Not Found
-
----
-
-### 🔹 Delete Product
-
-```
-DELETE /api/products/{id}
-```
-
-Deletes the product
-Status: 204 No Content
-
----
-
-### 🔹 Filter by Category
-
-```
-GET /api/products/filter/category?category=Electronics
-```
-
----
-
-### 🔹 Filter by Price
-
-```
-GET /api/products/filter/price?min=100&max=1000
-```
-
 ---
 
 ## 🧪 Testing
@@ -143,110 +83,73 @@ The API was tested using Postman.
 
 Test cases performed:
 
-* Created at least 3 products
-* Retrieved all products
-* Retrieved product by ID
-* Updated product using PUT
-* Deleted product
-* Filtered products by category and price
-* Tested invalid ID (returns 404)
+- Created at least 3 products
+- Retrieved all products
+- Retrieved product by ID
+- Updated product using PUT
+- Deleted product
+- Filtered products by category and price
+- Tested invalid ID (returns 404)
 
----
+### Testing Screenshots
 
-## 📸 API Testing Screenshots
-
-### 🔹 Get All Products
-![Get All](testing/get-all.png)
-
-### 🔹 Get Product by ID
-![Get By ID](testing/get-by-id.png)
-
-### 🔹 Create Product
+#### Create Product (POST)
 ![POST](testing/post.png)
 
-### 🔹 Update Product
-![PUT](testing/put.png)
+#### Get All Products (GET)
+![GET All](testing/get-all.png)
 
-### 🔹 Delete Product
+#### Get Product by ID (GET)
+![GET by ID](testing/get-by-id.png)
+
+#### Update Product (PUT)
+![PUT Update](testing/put.png)
+
+#### Delete Product (DELETE)
 ![DELETE](testing/delete.png)
 
-### 🔹 Filter by Category
-![Category](testing/filter-price.png)
+#### Filter by Category
+![Filter Category](testing/filter-category.png)
 
-### 🔹 Filter by Price
-![Price](testing/filter-price.png)
+#### Filter by Price
+![Filter Price](testing/filter-price.png)
 
-### 🔹 Error Handling (404)
-![Error](testing/error-404.png)
-
----
-
-## 📊 API Summary
-
-| Method | Endpoint           | Description        |
-| ------ | ------------------ | ------------------ |
-| GET    | /api/products      | Get all products   |
-| GET    | /api/products/{id} | Get product by ID  |
-| POST   | /api/products      | Create product     |
-| PUT    | /api/products/{id} | Update product     |
-| DELETE | /api/products/{id} | Delete product     |
-| GET    | /filter/category   | Filter by category |
-| GET    | /filter/price      | Filter by price    |
+#### Error Handling (404)
+![Error 404](testing/error-404.png)
 
 ---
 
 ## ⚠️ Limitations
 
-* Uses in-memory storage (data resets when the application restarts)
-* No database integration
-* No authentication
-
----
-
-## 📝 Notes
-
-This project uses in-memory storage, so all data will be lost when the application is restarted.
+- Uses in-memory storage (data resets when application restarts)
+- No database integration
+- No authentication
 
 ---
 
 ## ✅ Conclusion
 
-This project successfully implements a RESTful API based on the requirements of Laboratory 7.
-All CRUD operations and filtering features are working properly.
-
-
-
-
-
-
-
-#
-<!-- ============================================ -->
-<!-- LABORATORY 8 CONTENT                         -->
-<!-- ============================================ -->
-
-
-# 🛒 E-Commerce API - Laboratory 8
-
-## 📌 Project Overview
-
-This project is a **full-stack e-commerce application** built with Spring Boot and a MySQL database. The backend provides a RESTful API with persistent data storage using Spring Data JPA and Hibernate. The frontend consumes these endpoints dynamically using the **Fetch API**, replacing the static mock data from Lab 7.
-
-The goal of this project is to demonstrate:
-
-* HTTP methods (GET, POST, PUT, DELETE, PATCH)
-* REST API design with proper status codes
-* **Database integration with JPA/Hibernate**
-* **Frontend – Backend communication via Fetch API**
-* **Asynchronous JavaScript with error handling**
-* **Responsive design (mobile-first)**
+This project successfully implements a RESTful API based on the requirements of Laboratory 7. All CRUD operations and filtering features are working properly.
 
 ---
 
-## 👨‍💻 Authors
+---
 
-* Carpio, Lyndel J.
-* Cebuano, Irene A.
+# Laboratory 8 - Database Integration and Fetch API
+
+## 📌 Project Overview
+
+This project is a **full-stack e-commerce application** built with Spring Boot and a **MySQL database**. The backend provides a RESTful API with persistent data storage using Spring Data JPA and Hibernate. The frontend consumes these endpoints dynamically using the **Fetch API**.
+
+The goal of this project is to demonstrate:
+
+- HTTP methods (GET, POST, PUT, DELETE, PATCH)
+- REST API design with proper status codes
+- **Database integration with JPA/Hibernate**
+- **Frontend – Backend communication via Fetch API**
+- **Asynchronous JavaScript with error handling**
+- **Responsive design (mobile-first)**
+- **Data persistence (unlike Lab 7)**
 
 ---
 
@@ -278,17 +181,22 @@ The database `ecommerce_db` contains the following tables:
 
 ```
 Category (1) ──┬── (*) Product
-│
+               │
 Order (1) ─────┴── (*) OrderItem ── (*) Product (1)
 ```
 
 All relationships use JPA annotations (`@OneToMany`, `@ManyToOne`) with appropriate cascade and fetch strategies.
 
+### Database Screenshot
+
+![Database Tables](testing2/task8_database_tables.png)
+
 ---
 
-## 🚀 How to Run the Application
+## 🚀 How to Run the Application 
 
 ### Prerequisites
+
 - Java 21 or higher (Java 25 also works)
 - MySQL (XAMPP recommended)
 - Git (optional)
@@ -296,58 +204,64 @@ All relationships use JPA annotations (`@OneToMany`, `@ManyToOne`) with appropri
 ### Step-by-step
 
 1. **Clone the repository**
-   ```bash
-   git clone https://github.com/carpiolyndel/ecommerceapi.git
-   cd ecommerceapi
-   ```
+
+```bash
+git clone https://github.com/carpiolyndel/ecommerceapi.git
+cd ecommerceapi
+```
 
 2. **Start MySQL** (via XAMPP Control Panel)
 
 3. **Create the database**
-   ```sql
-   CREATE DATABASE ecommerce_db;
-   ```
+
+```sql
+CREATE DATABASE ecommerce_db;
+```
 
 4. **Configure database connection**  
    Edit `src/main/resources/application.properties`:
-   ```properties
-   spring.datasource.url=JDBC:mysql://localhost:3306/ecommerce_db?useSSL=false&serverTimezone=UTC
-   spring.datasource.username=root
-   spring.datasource.password=
-   spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-   spring.jpa.hibernate.ddl-auto=update
-   spring.jpa.show-sql=true
-   ```
+
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/ecommerce_db?useSSL=false&serverTimezone=UTC
+spring.datasource.username=root
+spring.datasource.password=
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+```
 
 5. **Run the backend**
-   ```bash
-   ./gradlew bootRun
-   ```
+
+```bash
+./gradlew bootRun
+```
 
 6. **Open the frontend** in your browser:
-   ```
-   http://localhost:8080
-   ```
+
+```
+http://localhost:8080
+```
 
 ---
 
-## 📡 API Endpoints (Backend)
+## 📡 API Endpoints (Lab 8)
 
 All endpoints are prefixed with `/api/products`.
 
 | Method | Endpoint | Description | Status Codes |
 |--------|----------|-------------|--------------|
 | GET | `/api/products` | Get all products | 200 OK |
-| GET | `/api/products/{id}` | Get product by ID | 200 OK, 404 Not Found |
-| POST | `/api/products` | Create new product | 201 Created, 400 Bad Request |
-| PUT | `/api/products/{id}` | Full update | 200 OK, 404 Not Found |
-| PATCH | `/api/products/{id}` | Partial update | 200 OK, 404 Not Found |
-| DELETE | `/api/products/{id}` | Delete product | 204 No Content, 404 Not Found |
+| GET | `/api/products/{id}` | Get product by ID | 200 OK, 404 |
+| POST | `/api/products` | Create new product | 201 Created, 400 |
+| PUT | `/api/products/{id}` | Full update | 200 OK, 404 |
+| PATCH | `/api/products/{id}` | Partial update | 200 OK, 404 |
+| DELETE | `/api/products/{id}` | Delete product | 204 No Content, 404 |
 | GET | `/api/products/filter/category?category={name}` | Filter by category | 200 OK |
 | GET | `/api/products/filter/price?min={min}&max={max}` | Filter by price range | 200 OK |
-| GET | `/api/products/filter/name?name={keyword}` | Filter by name (contains) | 200 OK |
+| GET | `/api/products/filter/name?name={keyword}` | Filter by name | 200 OK |
 
-### Sample POST Request (JSON)
+### Sample POST Request
+
 ```json
 {
   "name": "OFF! Overtime",
@@ -360,6 +274,7 @@ All endpoints are prefixed with `/api/products`.
 ```
 
 ### Sample GET Response
+
 ```json
 [
   {
@@ -377,20 +292,21 @@ All endpoints are prefixed with `/api/products`.
 
 ## 🎨 Frontend Features (Fetch API)
 
-- **Dynamic product listing** on the landing page and products page (data fetched from the database).
-- **Product detail page** with specifications and reviews.
-- **Shopping cart** using `localStorage` (cart persists across browser sessions).
-- **Checkout form** with client-side validation.
-- **Order history** stored in `localStorage` and displayed on the account page.
-- **Responsive design** – works on desktop, tablet, and mobile (media queries from Lab 3 preserved).
-- **Error handling** – displays user-friendly messages when the backend is unreachable or returns an error.
+- **Dynamic product listing** on landing page and products page (data fetched from database)
+- **Product detail page** with specifications and reviews
+- **Shopping cart** using `localStorage` (persists across browser sessions)
+- **Checkout form** with client-side validation
+- **Order history** stored in `localStorage` and displayed on account page
+- **Responsive design** – works on desktop, tablet, and mobile
+- **Error handling** – user-friendly messages when backend is unreachable
 
 ---
 
 ## 🧪 Testing
 
-### Backend (Postman / cURL)
-All endpoints were tested manually. The server was restarted multiple times to confirm data persistence (unlike Lab 7). Sample cURL commands:
+### Backend Testing (cURL)
+
+All endpoints were tested manually. The server was **restarted multiple times** to confirm data persistence (unlike Lab 7).
 
 ```bash
 # Create a product
@@ -403,37 +319,100 @@ curl http://localhost:8080/api/products
 curl "http://localhost:8080/api/products/filter/category?category=spray"
 ```
 
-### Frontend (Browser)
-- Opened `http://localhost:8080` – products load from the database.
-- Added items to cart, updated quantities, removed items – all worked.
-- Checked responsive behavior using DevTools device toolbar.
-- Console showed no CORS or 404 errors.
+### Database Testing
+
+The screenshot below shows that products are **stored in MySQL database** and persist after server restart.
+
+![Database Tables](testing2/task8_database_tables.png)
+
+### Frontend Testing (Browser)
+
+#### Desktop View
+
+Products load from database on page load.
+
+![Desktop View](testing2/task8_desktop_view.png)
+
+#### Mobile View (Responsive)
+
+The website is responsive and works on mobile devices.
+
+![Mobile View](testing2/task8_mobile_view.png)
+
+#### Cart Page
+
+Add to cart functionality works correctly.
+
+![Cart Page](testing2/task8_cart_page.png)
+
+#### Browser Console
+
+No errors in console only the icon.
+
+![Browser Console](testing2/task8_console_no_errors.png)
+
+### Database Product Testing
+
+Product display in Database.
+
+![Browser Console](testing2/task8_database_product.png)
+
+### Checkout Page
+
+Display the checkout page with product.
+
+![Browser Console](testing2/task8_checkout_page.png)
+
+
+### Add to Cart Function
+
+Add to cart button with displaying Function.
+![Browser Console](testing2/task8_add_to_cart.png)
+
+### Responsive Design Test
+
+| Device | Screen Size | Columns | Status |
+|--------|-------------|---------|--------|
+| Desktop | >768px | 3-4 columns | ✅ |
+| Tablet | 481-768px | 2 columns | ✅ |
+| Mobile | <480px | 1 column | ✅ |
 
 ---
 
-## 📸 Screenshots (Proof of Testing)
+## 📊 Comparison: Lab 7 vs Lab 8
 
-| Test | Screenshot                             |
-|------|----------------------------------------|
-| Desktop view (products loaded from DB) | `testing2/task8_desktop_view.png`      |
-| Mobile responsive view | `testing2/task8_mobile_view.png`       |
-| Cart page with items | `testing2/task8_cart_page.png`         |
-| Browser console – no errors | `testing2/task8_console_no_errors.png` |
-| Database tables in phpMyAdmin | `testing2/task8_database_tables.png`   |
-| Account Order with History | `testing2/task8_account_order.png`     |
+| Feature | Lab 7 | Lab 8 |
+|---------|-------|-------|
+| Storage | In-memory (List) | MySQL Database |
+| Data Persistence | ❌ Lost on restart | ✅ Permanent |
+| Frontend | ❌ None | ✅ HTML/CSS/JS with Fetch API |
+| Cart | ❌ None | ✅ localStorage |
+| PATCH Method | ❌ Not implemented | ✅ Implemented |
+| Filter by Name | ❌ None | ✅ Implemented |
+| CORS | ❌ Not configured | ✅ Configured |
 
-*(All screenshots are stored in the `/testing2` folder of the repository.)*
+---
+
+## 📝 Notes
+
+- **Unlike Lab 7, data persists after server restart** because it's stored in MySQL
+- The frontend uses **Fetch API** with `async/await` and proper error handling (`try/catch`, checking `response.ok`)
+- CORS is configured globally (`CorsConfig.java`) to allow requests from `http://localhost:8080`
+- All JPA entities have Javadoc comments
+- JavaScript functions contain inline comments explaining the logic
+
+---
 
 ## ✅ Conclusion
 
-This project successfully completes **Laboratory 8**:
+This project successfully completes
 
-- ✅ Backend migrated from in‑memory storage to MySQL using Spring Data JPA.
-- ✅ REST API supports full CRUD + filtering.
-- ✅ Frontend consumes the API via Fetch API, replacing static arrays.
-- ✅ Cart, checkout, and order history are implemented client‑side.
-- ✅ The application is responsive and free of CORS/console errors.
-- ✅ All required screenshots and documentation are provided.
+- ✅ Backend migrated from in-memory storage to MySQL using Spring Data JPA
+- ✅ REST API supports full CRUD + filtering
+- ✅ Frontend consumes API via Fetch API, replacing static arrays
+- ✅ Cart, checkout, and order history are implemented client-side
+- ✅ Application is responsive and free of CORS/console errors
+- ✅ All required screenshots and documentation are provided
 
 ---
 
