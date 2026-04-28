@@ -305,12 +305,28 @@ function renderProductDetail() {
             <h2>Technical Specifications</h2>
             <table>
                 <tr><th>Specification</th><th>Details</th></tr>
-                <tr><td><strong>Active Ingredient</strong></td><td>DEET 25%</td></tr>
-                <tr><td><strong>Protection Duration</strong></td><td>Up to 8 hours</td></tr>
-                <tr><td><strong>Application</strong></td><td>Spray evenly on exposed skin</td></tr>
-                <tr><td><strong>Water Resistance</strong></td><td>Water-resistant up to 4 hours</td></tr>
-                <tr><td><strong>Scent</strong></td><td>Fresh, mild fragrance</td></tr>
-                <tr><td><strong>Size</strong></td><td>100ml / 150ml / 200ml</td></tr>
+                <tr><td><strong>Active Ingredient</strong><\/strong>Non-waisteDEET 25%<\/strong>Non-waiste
+                <tr>
+                <tr>
+                    <td><strong>Protection Duration</strong></td>
+                    <td>Up to 8 hours<\/strong>
+                <th>
+                <tr>
+                    <td><strong>Application</strong><\/strong>
+                    <td>Spray evenly on exposed skin<\/strong>
+                <th>
+                <tr>
+                    <td><strong>Water Resistance</strong><\/strong>
+                    <td>Water-resistant up to 4 hours<\/strong>
+                <th>
+                <tr>
+                    <td><strong>Scent</strong><\/strong>
+                    <td>Fresh, mild fragrance<\/strong>
+                <th>
+                <tr>
+                    <td><strong>Size</strong><\/strong>
+                    <td>100ml / 150ml / 200ml<\/strong>
+                <th>
             </table>
         </div>
         <div class="review">
@@ -525,13 +541,13 @@ function updateCartSummary() {
     const subtotalEl = document.getElementById('cart-subtotal');
     const totalEl = document.getElementById('cart-total');
 
-    if (subtotalEl) subtotalEl.textContent = `₱${totals.subtotal.toFixed(2)}`;
-    if (totalEl) totalEl.textContent = `₱${totals.total.toFixed(2)}`;
+    if (subtotalEl) subtotalEl.innerHTML = `₱${totals.subtotal.toFixed(2)}`;
+    if (totalEl) totalEl.innerHTML = `₱${totals.total.toFixed(2)}`;
 
     const shippingEl = document.getElementById('cart-shipping');
     const taxEl = document.getElementById('cart-tax');
-    if (shippingEl) shippingEl.textContent = `₱${totals.shipping.toFixed(2)}`;
-    if (taxEl) taxEl.textContent = `₱${totals.tax.toFixed(2)}`;
+    if (shippingEl) shippingEl.innerHTML = `₱${totals.shipping.toFixed(2)}`;
+    if (taxEl) taxEl.innerHTML = `₱${totals.tax.toFixed(2)}`;
 
     const checkoutBtn = document.querySelector('.checkout-btn');
     if (checkoutBtn) {
@@ -594,10 +610,10 @@ function updateCheckoutSummary() {
     const shippingEl = document.getElementById('checkout-shipping');
     const taxEl = document.getElementById('checkout-tax');
 
-    if (subtotalEl) subtotalEl.textContent = `₱${totals.subtotal.toFixed(2)}`;
-    if (shippingEl) shippingEl.textContent = `₱${totals.shipping.toFixed(2)}`;
-    if (taxEl) taxEl.textContent = `₱${totals.tax.toFixed(2)}`;
-    if (totalEl) totalEl.textContent = `₱${totals.total.toFixed(2)}`;
+    if (subtotalEl) subtotalEl.innerHTML = `₱${totals.subtotal.toFixed(2)}`;
+    if (shippingEl) shippingEl.innerHTML = `₱${totals.shipping.toFixed(2)}`;
+    if (taxEl) taxEl.innerHTML = `₱${totals.tax.toFixed(2)}`;
+    if (totalEl) totalEl.innerHTML = `₱${totals.total.toFixed(2)}`;
 
     const orderItemsContainer = document.getElementById('order-items');
     if (orderItemsContainer) {
@@ -669,7 +685,7 @@ function initAccountPage() {
         orderHistoryList.innerHTML = '';
         orderHistory.forEach(order => {
             const li = document.createElement('li');
-            li.textContent = `Order #${order.id} — ₱${order.total.toFixed(2)} — ${order.date}`;
+            li.innerHTML = `Order #${order.id} — ₱${order.total.toFixed(2)} — ${order.date}`;
             orderHistoryList.appendChild(li);
         });
     }
