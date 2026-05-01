@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
  * Service class for loading user-specific data during authentication.
  *
  * This service is used by Spring Security's DaoAuthenticationProvider
- * to retrieve user details from tahe database.
+ * to retrieve user details from the database.
  *
  * @author Carpio, Lyndel J.
  * @author Cebuano, Irene A.

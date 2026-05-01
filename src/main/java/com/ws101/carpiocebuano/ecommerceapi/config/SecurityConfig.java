@@ -6,14 +6,13 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 /**
- * Security configuration class for the application.
- *
- * Sets up authentication, authorization rules, and security filters.
+ * Security configuration for the application.
  * Uses session-based authentication with form login.
  *
  * @author Carpio, Lyndel J.
@@ -24,8 +23,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     /**
-     * Configures the password encoder for hashing passwords.
-     * BCrypt is used for secure password storage.
+     * Password encoder using BCrypt for secure password hashing.
      *
      * @return BCryptPasswordEncoder instance
      */
@@ -35,38 +33,37 @@ public class SecurityConfig {
     }
 
     /**
-     * Configures the security filter chain.
+     * Configures security rules for HTTP requests.
      * Defines which endpoints are public and which require authentication.
      *
-     * @param http the HttpSecurity object to configure
-     * @return the configured SecurityFilterChain
+     * @param http HttpSecurity object
+     * @return configured SecurityFilterChain
      * @throws Exception if configuration fails
      */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                // Disable CSRF for testing (enable in production)
-                .csrf(csrf -> csrf.disable())
+                .csrf(AbstractHttpConfigurer::disable)
 
-                // Define authorization rules for endpoints
                 .authorizeHttpRequests(auth -> auth
-                        // Public endpoints - accessible without authentication
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/products").permitAll()
-                        .requestMatchers("/api/products/**").permitAll()
+                        .requestMatchers("/api/products/{id}").permitAll()
+                        .requestMatchers("/api/products/filter/**").permitAll()
                         .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
-                        .requestMatchers("/", "/index.html", "/products.html", "/detail.html", "/login.html", "/register.html").permitAll()
-                        // All other endpoints require authentication
+                        .requestMatchers("/", "/index.html", "/products.html", "/detail.html").permitAll()
+                        .requestMatchers("/signup.html", "/register.html", "/account.html").permitAll()
                         .anyRequest().authenticated()
                 )
-                // Form login configuration for web interface
+
                 .formLogin(form -> form
-                        .loginPage("/login.html")
-                        .loginProcessingUrl("/login")
+                        .loginPage("/signup.html")
+                        .loginProcessingUrl("/signup")
                         .defaultSuccessUrl("/", true)
+                        .failureUrl("/signup.html?error=true")
                         .permitAll()
                 )
-                // Logout configuration
+
                 .logout(logout -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/")
@@ -79,10 +76,9 @@ public class SecurityConfig {
     }
 
     /**
-     * Provides the AuthenticationManager bean.
-     * Used for handling authentication requests.
+     * Provides AuthenticationManager for handling authentication requests.
      *
-     * @param config the AuthenticationConfiguration
+     * @param config AuthenticationConfiguration
      * @return AuthenticationManager instance
      * @throws Exception if configuration fails
      */
