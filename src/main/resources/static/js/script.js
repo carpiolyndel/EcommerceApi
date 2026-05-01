@@ -46,6 +46,89 @@ async function fetchProductsFromBackend() {
 }
 
 // ========================================
+// TASK 7: AUTHENTICATION ERROR HANDLING (401/403)
+// ========================================
+
+/**
+ * Wrapper function para sa mga authenticated API calls.
+ * Awtomatikong nagha-handle ng 401 (not logged in) at 403 (forbidden).
+ */
+async function authFetch(url, options = {}) {
+    try {
+        const response = await fetch(url, options);
+
+        // 401 Unauthorized - hindi naka-login
+        if (response.status === 401) {
+            console.log('401: User not authenticated. Redirecting to login...');
+            sessionStorage.setItem('redirectAfterLogin', window.location.pathname);
+            showMessage('Please login to continue', 'error');
+            setTimeout(() => {
+                window.location.href = '/login.html?error=Please login to continue';
+            }, 1500);
+            throw new Error('Unauthorized: Please login');
+        }
+
+        // 403 Forbidden - walang permission
+        if (response.status === 403) {
+            console.log('403: Access denied. User lacks permission.');
+            showMessage('Access denied. You do not have permission for this action.', 'error');
+            throw new Error('Forbidden: Insufficient permissions');
+        }
+
+        return response;
+    } catch (error) {
+        if (error.message.includes('Unauthorized') || error.message.includes('Forbidden')) {
+            throw error;
+        }
+        console.error('Auth fetch error:', error);
+        throw error;
+    }
+}
+
+/**
+ * I-check kung ang user ay authenticated.
+ */
+async function checkAuthStatus() {
+    try {
+        const response = await fetch('/api/auth/check');
+        if (response.status === 401) {
+            return false;
+        }
+        return response.ok;
+    } catch (error) {
+        console.error('Auth check error:', error);
+        return false;
+    }
+}
+
+/**
+ * I-protect ang isang page.
+ * Kung hindi naka-login, i-redirect sa login page.
+ */
+async function protectPage() {
+    const isAuthenticated = await checkAuthStatus();
+    if (!isAuthenticated) {
+        sessionStorage.setItem('redirectAfterLogin', window.location.pathname);
+        window.location.href = '/login.html?error=Please login to access this page';
+        return false;
+    }
+    return true;
+}
+
+/**
+ * Mag-logout ng user
+ */
+async function logoutUser() {
+    try {
+        await fetch('/logout', { method: 'POST' });
+        window.location.href = '/login.html?logout=true';
+    } catch (error) {
+        console.error('Logout error:', error);
+        window.location.href = '/login.html';
+    }
+}
+
+// ========================================
 // SHOPPING CART FUNCTIONS
 // ========================================
 
@@ -305,28 +388,27 @@ function renderProductDetail() {
             <h2>Technical Specifications</h2>
             <table>
                 <tr><th>Specification</th><th>Details</th></tr>
-                <tr><td><strong>Active Ingredient</strong><\/strong>Non-waisteDEET 25%<\/strong>Non-waiste
-                <tr>
+                <tr><td><strong>Active Ingredient</strong></td><td>DEET 25%</td></tr>
                 <tr>
                     <td><strong>Protection Duration</strong></td>
-                    <td>Up to 8 hours<\/strong>
-                <th>
+                    <td>Up to 8 hours</td>
+                </tr>
                 <tr>
-                    <td><strong>Application</strong><\/strong>
-                    <td>Spray evenly on exposed skin<\/strong>
-                <th>
+                    <td><strong>Application</strong></td>
+                    <td>Spray evenly on exposed skin</td>
+                </tr>
                 <tr>
-                    <td><strong>Water Resistance</strong><\/strong>
-                    <td>Water-resistant up to 4 hours<\/strong>
-                <th>
+                    <td><strong>Water Resistance</strong></td>
+                    <td>Water-resistant up to 4 hours</td>
+                </tr>
                 <tr>
-                    <td><strong>Scent</strong><\/strong>
-                    <td>Fresh, mild fragrance<\/strong>
-                <th>
+                    <td><strong>Scent</strong></td>
+                    <td>Fresh, mild fragrance</td>
+                </tr>
                 <tr>
-                    <td><strong>Size</strong><\/strong>
-                    <td>100ml / 150ml / 200ml<\/strong>
-                <th>
+                    <td><strong>Size</strong></td>
+                    <td>100ml / 150ml / 200ml</td>
+                </tr>
             </table>
         </div>
         <div class="review">
@@ -692,7 +774,7 @@ function initAccountPage() {
 }
 
 // ========================================
-// SIGNUP PAGE
+// SIGNUP PAGE (signup.html)
 // ========================================
 
 function initSignupPage() {
@@ -814,4 +896,23 @@ document.addEventListener('DOMContentLoaded', async function() {
     updateCartCount();
     attachGlobalEventListeners();
     await fetchProductsFromBackend();
+
+    const path = window.location.pathname;
+
+    if (path.includes('products.html')) {
+        renderProducts();
+        attachFilterEventListeners();
+    } else if (path === '/' || path.includes('landing.html') || path.includes('index.html')) {
+        renderLandingPage();
+    } else if (path.includes('detail.html')) {
+        renderProductDetail();
+    } else if (path.includes('cart.html')) {
+        renderCart();
+    } else if (path.includes('checkout')) {
+        initCheckoutForm();
+    } else if (path.includes('account.html')) {
+        initAccountPage();
+    } else if (path.includes('signup.html')) {
+        initSignupPage();
+    }
 });
