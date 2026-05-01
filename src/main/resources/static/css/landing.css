@@ -1,0 +1,244 @@
+/* ========================================
+   LANDING PAGE STYLES
+   ======================================== */
+
+/* Hero Section */
+.hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 20px;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    border-radius: 12px;
+    margin: 20px auto 40px;
+    max-width: 1200px;
+    min-height: 400px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: var(--white);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    color: rgba(255,255,255,0.9);
+    max-width: 600px;
+}
+
+.hero button {
+    background-color: var(--white);
+    color: var(--primary-color);
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.hero button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Section Headers */
+.featured-products h2,
+.discounted-products h2 {
+    text-align: center;
+    margin: 40px 0 30px;
+    font-size: 2rem;
+    color: var(--primary-color);
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.featured-products h2::after,
+.discounted-products h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: var(--primary-color);
+}
+
+/* Product List Grid */
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    max-width: 1200px;
+    margin: 0 auto 40px;
+    padding: 0 20px;
+}
+
+/* Product Cards */
+.product-card {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+}
+
+.product-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.product-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+}
+
+.product-card p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
+
+.product-card .price {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: var(--success);
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.product-card .discount {
+    background-color: var(--danger);
+    color: white;
+    padding: 3px 8px;
+    border-radius: 5px;
+    font-size: 0.75rem;
+    margin-left: 8px;
+}
+
+.product-card button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.product-card button:hover {
+    background-color: var(--hover-color);
+}
+
+/* Sale Badge */
+.discounted-products .product-card {
+    border: 2px solid var(--primary-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.discounted-products .product-card::before {
+    content: 'SALE';
+    position: absolute;
+    top: 10px;
+    right: -30px;
+    background: var(--primary-color);
+    color: white;
+    padding: 5px 40px;
+    transform: rotate(45deg);
+    font-size: 0.75rem;
+    font-weight: bold;
+    z-index: 1;
+}
+
+/* Loading and Empty States */
+.loading {
+    text-align: center;
+    padding: 50px;
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    grid-column: 1 / -1;
+}
+
+/* Animations */
+.hero h1 {
+    animation: slideInLeft 0.8s ease;
+}
+
+.hero p {
+    animation: fadeIn 0.8s ease 0.2s both;
+}
+
+.hero button {
+    animation: fadeIn 0.8s ease 0.4s both;
+}
+
+.product-card {
+    animation: fadeIn 0.6s ease;
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Landing Page Responsive */
+@media (max-width: 768px) {
+    .hero {
+        margin: 15px;
+        padding: 50px 15px;
+    }
+
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .featured-products h2,
+    .discounted-products h2 {
+        font-size: 1.5rem;
+    }
+
+    .product-list {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .product-list {
+        grid-template-columns: 1fr;
+    }
+
+    .hero h1 {
+        font-size: 1.5rem;
+    }
+}

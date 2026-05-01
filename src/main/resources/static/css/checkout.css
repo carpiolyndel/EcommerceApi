@@ -1,0 +1,223 @@
+/* ========================================
+   CHECKOUT PAGE STYLES - FIXED PAYMENT METHOD
+   ======================================== */
+
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin: 20px 0 30px;
+}
+
+.checkout-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 30px;
+}
+
+.checkout-form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.shipping, .payment {
+    background-color: var(--white);
+    padding: 25px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+}
+
+.shipping h2, .payment h2 {
+    color: var(--primary-color);
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--accent-color);
+}
+
+fieldset {
+    border: none;
+    padding: 0;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* ========== FIXED PAYMENT METHOD STYLES ========== */
+.payment-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.payment-option {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: #fafafa;
+}
+
+.payment-option:hover {
+    border-color: var(--primary-color);
+    background-color: #fff5eb;
+}
+
+.payment-option label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    cursor: pointer;
+    margin: 0;
+    font-weight: normal;
+}
+
+.payment-option input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    cursor: pointer;
+    accent-color: var(--primary-color);
+}
+
+.payment-option .payment-label {
+    font-weight: 500;
+    color: var(--text-main);
+}
+
+.payment-option .payment-description {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-left: auto;
+}
+
+/* Alternative: Simple radio buttons layout */
+.payment-simple {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.payment-simple label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.payment-simple input[type="radio"] {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+}
+
+/* Order Summary */
+.order-summary {
+    background-color: var(--white);
+    padding: 25px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    height: fit-content;
+}
+
+.order-summary h2 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.order-items {
+    margin-bottom: 20px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.order-item-cart {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.order-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+}
+
+.order-total {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0;
+    margin-top: 10px;
+    border-top: 2px solid var(--border);
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: var(--primary-color);
+}
+
+.submit-btn {
+    width: 100%;
+    margin-top: 20px;
+}
+
+/* Error Styles */
+.error {
+    border-color: var(--danger) !important;
+    background-color: var(--danger-bg) !important;
+}
+
+.error-message {
+    color: var(--danger);
+    font-size: 0.8rem;
+    margin-top: 5px;
+    display: block;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .checkout-wrapper {
+        grid-template-columns: 1fr;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .payment-option {
+        padding: 10px;
+    }
+}

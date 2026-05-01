@@ -1,0 +1,278 @@
+/* ========================================
+   ACCOUNT PAGE STYLES
+   ======================================== */
+
+/* Body and layout fix */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+/* User Header */
+.user-header {
+    background: linear-gradient(135deg, var(--primary-color), #1a2a3a);
+    border-radius: 12px;
+    padding: 25px 30px;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.user-header h1 {
+    color: var(--white);
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+/* Account Navigation */
+.account-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+    margin: 0;
+    padding: 0;
+}
+
+.account-nav ul li a {
+    color: rgba(255,255,255,0.9);
+    text-decoration: none;
+    padding: 8px 20px;
+    border-radius: 30px;
+    background-color: rgba(255,255,255,0.1);
+    transition: all 0.3s ease;
+}
+
+.account-nav ul li a:hover {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+/* Section Headers */
+main h2 {
+    font-size: 1.6rem;
+    color: var(--primary-color);
+    margin: 30px 0 20px 0;
+    padding-bottom: 10px;
+    border-bottom: 3px solid var(--accent-color);
+    display: inline-block;
+}
+
+main h3 {
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    margin: 30px 0 15px 0;
+}
+
+/* Orders Container */
+#orders-container {
+    margin-bottom: 40px;
+}
+
+/* Details (Expandable Orders) */
+details {
+    background-color: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+details:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+details summary {
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 15px 20px;
+    cursor: pointer;
+    background-color: var(--muted-bg);
+    color: var(--primary-color);
+    list-style: none;
+    position: relative;
+    padding-right: 40px;
+}
+
+details summary::-webkit-details-marker {
+    display: none;
+}
+
+details summary::before {
+    content: "▶";
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    transition: transform 0.3s;
+    color: var(--primary-color);
+}
+
+details[open] summary::before {
+    transform: rotate(90deg);
+}
+
+.dynamic-details {
+    padding: 15px 20px;
+    border-top: 1px solid var(--border);
+    background-color: var(--white);
+}
+
+.dynamic-details p {
+    margin: 8px 0;
+    padding: 0;
+}
+
+.dynamic-details p strong {
+    color: var(--primary-color);
+}
+
+/* Order History List */
+.order-history {
+    list-style: none;
+    padding: 0;
+    margin-top: 15px;
+    margin-bottom: 30px;
+}
+
+.order-history li {
+    background-color: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 15px 20px;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.order-history li:hover {
+    transform: translateX(5px);
+    border-left: 4px solid var(--primary-color);
+}
+
+.order-history li::after {
+    content: "✓ Delivered";
+    background-color: var(--success);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+}
+
+/* Loading State */
+.loading {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-secondary);
+}
+
+/* Empty Message */
+.empty-message {
+    text-align: center;
+    padding: 40px;
+    background-color: var(--white);
+    border-radius: 10px;
+    color: var(--text-secondary);
+}
+
+/* Footer */
+footer {
+    margin-top: auto;
+    width: 100%;
+    background-color: var(--dark);
+    color: white;
+    text-align: center;
+    padding: 25px;
+}
+
+footer p {
+    margin: 0;
+    color: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    main {
+        margin: 20px auto;
+        padding: 0 15px;
+    }
+
+    .user-header {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .account-nav ul {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .order-history li {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .order-history li::after {
+        align-self: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .user-header h1 {
+        font-size: 1.2rem;
+    }
+
+    .account-nav ul li a {
+        padding: 6px 12px;
+        font-size: 0.85rem;
+    }
+
+    main h2 {
+        font-size: 1.3rem;
+    }
+
+    details summary {
+        font-size: 0.9rem;
+        padding: 12px 15px;
+    }
+}
+
+i {
+    margin-right: 8px;
+}
+
+.user-header h1 i {
+    margin-right: 12px;
+    color: var(--accent-color);
+}
+
+.account-nav ul li a i {
+    margin-right: 8px;
+}
+
+main h2 i, main h3 i {
+    margin-right: 10px;
+    color: var(--primary-color);
+}
+
+.order-history li::before {
+    content: "\f0a9";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    margin-right: 10px;
+    color: var(--primary-color);
+}
