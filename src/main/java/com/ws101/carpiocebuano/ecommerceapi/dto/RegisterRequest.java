@@ -1,6 +1,7 @@
 package com.ws101.carpiocebuano.ecommerceapi.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,5 +28,6 @@ public class RegisterRequest {
     private String password;
 
     @NotBlank(message = "Role is required")
+    @Pattern(regexp = "^(USER|ADMIN)$", message = "Role must be either USER or ADMIN")
     private String role;
 }
