@@ -37,7 +37,7 @@ async function fetchProductsFromBackend() {
         ));
 
         console.log('Products loaded from database:', products.length);
-        refreshCurrentPage();
+        await refreshCurrentPage();
 
     } catch (error) {
         console.error('Error fetching products:', error);
@@ -873,7 +873,7 @@ function attachGlobalEventListeners() {
 // REFRESH CURRENT PAGE
 // ========================================
 
-function refreshCurrentPage() {
+async function refreshCurrentPage() {
     const path = window.location.pathname;
 
     if (path.includes('products.html')) {
@@ -886,8 +886,10 @@ function refreshCurrentPage() {
     } else if (path.includes('cart.html')) {
         renderCart();
     } else if (path.includes('checkout')) {
+        protectPage();
         initCheckoutForm();
     } else if (path.includes('account.html')) {
+        protectPage();
         initAccountPage();
     } else if (path.includes('signup.html')) {
         initSignupPage();
@@ -916,8 +918,10 @@ document.addEventListener('DOMContentLoaded', async function() {
     } else if (path.includes('cart.html')) {
         renderCart();
     } else if (path.includes('checkout')) {
+        await protectPage();
         initCheckoutForm();
     } else if (path.includes('account.html')) {
+        await protectPage();
         initAccountPage();
     } else if (path.includes('signup.html')) {
         initSignupPage();
