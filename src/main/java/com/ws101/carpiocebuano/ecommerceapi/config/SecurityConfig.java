@@ -18,6 +18,7 @@ import org.springframework.security.web.SecurityFilterChain;
  * @author Carpio, Lyndel J.
  * @author Cebuano, Irene A.
  */
+@SuppressWarnings("unused")
 @Configuration
 @EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
@@ -53,24 +54,21 @@ public class SecurityConfig {
                         .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
                         .requestMatchers("/", "/index.html", "/products.html", "/detail.html").permitAll()
                         .requestMatchers("/signup.html", "/register.html", "/account.html").permitAll()
-                        .anyRequest().authenticated()
-                )
+                        .anyRequest().authenticated())
 
                 .formLogin(form -> form
                         .loginPage("/signup.html")
-                        .loginProcessingUrl("/signup")
+                        .loginProcessingUrl("/login")
                         .defaultSuccessUrl("/", true)
                         .failureUrl("/signup.html?error=true")
-                        .permitAll()
-                )
+                        .permitAll())
 
                 .logout(logout -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/")
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID")
-                        .permitAll()
-                );
+                        .permitAll());
 
         return http.build();
     }

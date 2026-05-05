@@ -19,6 +19,7 @@ import java.util.Map;
  *
  * @author Carpio, Lyndel J. & Cebuano, Irene A.
  */
+@SuppressWarnings("unused")
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 

@@ -6,6 +6,9 @@ import com.ws101.carpiocebuano.ecommerceapi.repository.UserRepository;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
@@ -68,8 +71,22 @@ public class AuthController {
      *
      * @return response indicating authentication status
      */
+    @GetMapping("/csrf")
+    public ResponseEntity<Map<String, String>> csrf(CsrfToken csrfToken) {
+        Map<String, String> response = new HashMap<>();
+        response.put("token", csrfToken.getToken());
+        return ResponseEntity.ok(response);
+    }
+
     @GetMapping("/check")
     public ResponseEntity<?> checkAuth() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || !authentication.isAuthenticated() || "anonymousUser".equals(authentication.getPrincipal())) {
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Unauthorized");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+        }
+
         Map<String, String> response = new HashMap<>();
         response.put("message", "Authenticated");
         return ResponseEntity.ok(response);

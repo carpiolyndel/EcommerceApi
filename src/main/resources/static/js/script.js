@@ -55,7 +55,14 @@ async function fetchProductsFromBackend() {
  */
 async function authFetch(url, options = {}) {
     try {
-        const response = await fetch(url, options);
+        const requestOptions = { ...options };
+        requestOptions.headers = requestOptions.headers || {};
+
+        if (window.csrfToken && !requestOptions.headers['X-XSRF-TOKEN']) {
+            requestOptions.headers['X-XSRF-TOKEN'] = window.csrfToken;
+        }
+
+        const response = await fetch(url, requestOptions);
 
         // 401 Unauthorized - hindi naka-login
         if (response.status === 401) {
@@ -63,7 +70,7 @@ async function authFetch(url, options = {}) {
             sessionStorage.setItem('redirectAfterLogin', window.location.pathname);
             showMessage('Please login to continue', 'error');
             setTimeout(() => {
-                window.location.href = '/login.html?error=Please login to continue';
+                window.location.href = '/signup.html?error=Please login to continue';
             }, 1500);
             throw new Error('Unauthorized: Please login');
         }
@@ -109,7 +116,7 @@ async function protectPage() {
     const isAuthenticated = await checkAuthStatus();
     if (!isAuthenticated) {
         sessionStorage.setItem('redirectAfterLogin', window.location.pathname);
-        window.location.href = '/login.html?error=Please login to access this page';
+        window.location.href = '/signup.html?error=Please login to access this page';
         return false;
     }
     return true;
@@ -120,11 +127,11 @@ async function protectPage() {
  */
 async function logoutUser() {
     try {
-        await fetch('/logout', { method: 'POST' });
-        window.location.href = '/login.html?logout=true';
+        await authFetch('/logout', { method: 'POST' });
+        window.location.href = '/signup.html?logout=true';
     } catch (error) {
         console.error('Logout error:', error);
-        window.location.href = '/login.html';
+        window.location.href = '/signup.html';
     }
 }
 
