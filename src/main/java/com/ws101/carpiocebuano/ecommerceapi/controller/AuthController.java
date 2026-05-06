@@ -62,6 +62,7 @@ public class AuthController {
 
         Map<String, String> response = new HashMap<>();
         response.put("message", "User registered successfully");
+        response.put("username", request.getUsername());
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 

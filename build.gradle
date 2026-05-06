@@ -35,11 +35,12 @@ dependencies {
     // MySQL Database Driver
     implementation 'mysql:mysql-connector-java:8.0.33'
 
-    //Spring Security this is for LAB 9
+    // Spring Security this is for LAB 9
     implementation 'org.springframework.boot:spring-boot-starter-security'
 
     // Testing
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'com.h2database:h2'
 }
 
 tasks.named('test') {
