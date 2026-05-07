@@ -101,6 +101,9 @@ Invalid requests return **400 Bad Request** with detailed field errors:
 | POST | `/logout` | Logout and invalidate session |
 | GET | `/api/auth/check` | Check if user is authenticated |
 
+### Public Product Access
+The API allows unauthenticated access to product browsing endpoints using HTTP GET methods. Only modification operations require authentication and the ADMIN role.
+
 ### Protected Endpoints (Authentication Required)
 
 **ADMIN-Only Endpoints (Requires ROLE_ADMIN):**
@@ -112,6 +115,13 @@ Invalid requests return **400 Bad Request** with detailed field errors:
 
 **User Endpoints (ROLE_USER or ROLE_ADMIN):**
 - Orders and cart management (can be implemented)
+
+### Image View and Product Media
+The frontend supports product information with image URLs, and the README includes guidance for capturing screen demos.
+
+- The `imageUrl` field on products must be a valid `http://` or `https://` URL.
+- Static UI assets are served from `src/main/resources/static/images/`.
+- The login/register page at `/signup.html` includes the session-based form login flow.
 
 ### Error Responses
 
@@ -288,6 +298,23 @@ Expected: `302 Redirect` + session invalidated
 
 ---
 
+## Screenshots
+
+![Register Success](tLab9/01-register-success.png)
+![Password Encrypted in Database](tLab9/02-password-encrypted-db.png)
+![Login Success and Session Creation](tLab9/03-login-success-session-create.png)
+![Access with Login Success](tLab9/04-access-with-login-success.png)
+![Login Page UI](tLab9/05-login-page-ui.png)
+![Register Page UI](tLab9/06-register-page-ui.png)
+![Authentication Check Login](tLab9/07-auth-check-login.png)
+![Access Denied for User](tLab9/08-access-denied-for-user.png)
+![Access for Admin](tLab9/09-for-adminn.png)
+![Authentication Check Logout](tLab9/10-auth-checck-logout.png)
+![Register Success](tLab9/11-register-success.png)
+![Negative Price Validation](tLab9/12-negative-price.png)
+![Empty Name Validation](tLab9/13-empty-name.png)
+![With Cookies](tLab9/14-with-cookies.png)
+
 ## Code Quality
 
 ### Security Configuration (SecurityConfig.java)
@@ -397,3 +424,4 @@ For issues or questions, contact the development team or file an issue on GitHub
 
 ## Version History
 - **v1.0.0** (May 2026): Initial release with authentication, authorization, and validation
+ 
