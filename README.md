@@ -101,6 +101,9 @@ Invalid requests return **400 Bad Request** with detailed field errors:
 | POST | `/logout` | Logout and invalidate session |
 | GET | `/api/auth/check` | Check if user is authenticated |
 
+### Public Product Access
+The API allows unauthenticated access to product browsing endpoints using HTTP GET methods. Only modification operations require authentication and the ADMIN role.
+
 ### Protected Endpoints (Authentication Required)
 
 **ADMIN-Only Endpoints (Requires ROLE_ADMIN):**
@@ -112,6 +115,13 @@ Invalid requests return **400 Bad Request** with detailed field errors:
 
 **User Endpoints (ROLE_USER or ROLE_ADMIN):**
 - Orders and cart management (can be implemented)
+
+### Image View and Product Media
+The frontend supports product information with image URLs, and the README includes guidance for capturing screen demos.
+
+- The `imageUrl` field on products must be a valid `http://` or `https://` URL.
+- Static UI assets are served from `src/main/resources/static/images/`.
+- The login/register page at `/signup.html` includes the session-based form login flow.
 
 ### Error Responses
 
@@ -397,3 +407,4 @@ For issues or questions, contact the development team or file an issue on GitHub
 
 ## Version History
 - **v1.0.0** (May 2026): Initial release with authentication, authorization, and validation
+ 
