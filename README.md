@@ -300,20 +300,20 @@ Expected: `302 Redirect` + session invalidated
 
 ## Screenshots
 
-![01-register-success](tLab9/01-register-success.png)
-![02-password-encrypted-db](tLab9/02-password-encrypted-db.png)
-![03-login-success-session-create](tLab9/03-login-success-session-create.png)
-![04-access-with-login-success](tLab9/04-access-with-login-success.png)
-![05-login-page-ui](tLab9/05-login-page-ui.png)
-![06-register-page-ui](tLab9/06-register-page-ui.png)
-![07-auth-check-login](tLab9/07-auth-check-login.png)
-![08-access-denied-for-user](tLab9/08-access-denied-for-user.png)
-![09-for-adminn](tLab9/09-for-adminn.png)
-![10-auth-checck-logout](tLab9/10-auth-checck-logout.png)
-![11-register-success](tLab9/11-register-success.png)
-![12-negative-price](tLab9/12-negative-price.png)
-![13-empty-name](tLab9/13-empty-name.png)
-![14-with-cookies](tLab9/14-with-cookies.png)
+![Register Success](tLab9/01-register-success.png)
+![Password Encrypted in Database](tLab9/02-password-encrypted-db.png)
+![Login Success and Session Creation](tLab9/03-login-success-session-create.png)
+![Access with Login Success](tLab9/04-access-with-login-success.png)
+![Login Page UI](tLab9/05-login-page-ui.png)
+![Register Page UI](tLab9/06-register-page-ui.png)
+![Authentication Check Login](tLab9/07-auth-check-login.png)
+![Access Denied for User](tLab9/08-access-denied-for-user.png)
+![Access for Admin](tLab9/09-for-adminn.png)
+![Authentication Check Logout](tLab9/10-auth-checck-logout.png)
+![Register Success](tLab9/11-register-success.png)
+![Negative Price Validation](tLab9/12-negative-price.png)
+![Empty Name Validation](tLab9/13-empty-name.png)
+![With Cookies](tLab9/14-with-cookies.png)
 
 ## Code Quality
 
