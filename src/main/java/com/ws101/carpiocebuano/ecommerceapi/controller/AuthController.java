@@ -1,13 +1,19 @@
 package com.ws101.carpiocebuano.ecommerceapi.controller;
 
+import com.ws101.carpiocebuano.ecommerceapi.dto.LoginRequest;
 import com.ws101.carpiocebuano.ecommerceapi.dto.RegisterRequest;
 import com.ws101.carpiocebuano.ecommerceapi.model.User;
 import com.ws101.carpiocebuano.ecommerceapi.repository.UserRepository;
+import com.ws101.carpiocebuano.ecommerceapi.service.JwtUtil;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -27,10 +33,17 @@ public class AuthController {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final AuthenticationManager authenticationManager;
+    private final JwtUtil jwtUtil;
 
-    public AuthController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public AuthController(UserRepository userRepository,
+                          PasswordEncoder passwordEncoder,
+                          AuthenticationManager authenticationManager,
+                          JwtUtil jwtUtil) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.authenticationManager = authenticationManager;
+        this.jwtUtil = jwtUtil;
     }
 
     /**
@@ -64,6 +77,38 @@ public class AuthController {
         response.put("message", "User registered successfully");
         response.put("username", request.getUsername());
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    /**
+     * Authenticates a user and returns a JWT token.
+     *
+     * @param request login credentials
+     * @return JWT token response or unauthorized status
+     */
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@Valid @RequestBody LoginRequest request) {
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
+            );
+
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            String token = jwtUtil.generateToken(userDetails);
+
+            Map<String, String> response = new HashMap<>();
+            response.put("token", token);
+            response.put("username", userDetails.getUsername());
+            response.put("role", userDetails.getAuthorities().stream()
+                    .findFirst()
+                    .map(Object::toString)
+                    .orElse("ROLE_USER"));
+
+            return ResponseEntity.ok(response);
+        } catch (BadCredentialsException ex) {
+            Map<String, String> error = new HashMap<>();
+            error.put("error", "Invalid username or password");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
+        }
     }
 
     /**

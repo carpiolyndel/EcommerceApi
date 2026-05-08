@@ -1,0 +1,81 @@
+> Task :clean
+
+> Task :compileJava
+.\gradlew : C:\Users\Acer\Videos\EcommerceApi\src\main\java\com\ws101\carpioceb
+uano\ecommerceapi\service\JwtUtil.java:93: error: cannot find symbol
+At line:1 char:8
++ $out = .\gradlew clean compileJava --console=plain 2>&1 | Out-String; ...
++        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (C:\Users\Acer\V...not find symbol 
+   :String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+                .claims(extraClaims)
+                ^
+  symbol:   method claims(Map<String,Object>)
+  location: interface JwtBuilder
+C:\Users\Acer\Videos\EcommerceApi\src\main\java\com\ws101\carpiocebuano\ecommer
+ceapi\config\SecurityConfig.java:98: error: constructor 
+DaoAuthenticationProvider in class DaoAuthenticationProvider cannot be applied 
+to given types;
+        DaoAuthenticationProvider authProvider = new 
+DaoAuthenticationProvider();
+                                                 ^
+  required: UserDetailsService
+  found:    no arguments
+  reason: actual and formal argument lists differ in length
+C:\Users\Acer\Videos\EcommerceApi\src\main\java\com\ws101\carpiocebuano\ecommer
+ceapi\config\SecurityConfig.java:99: error: cannot find symbol
+        authProvider.setUserDetailsService(userDetailsService);
+                    ^
+  symbol:   method setUserDetailsService(UserDetailsService)
+  location: variable authProvider of type DaoAuthenticationProvider
+Note: C:\Users\Acer\Videos\EcommerceApi\src\main\java\com\ws101\carpiocebuano\e
+commerceapi\service\JwtUtil.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+3 errors
+
+
+> Task :compileJava FAILED
+
+[Incubating] Problems report is available at: file:///C:/Users/Acer/Videos/EcommerceApi/build/reports/problems/problems-report.html
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':compileJava'.
+> Compilation failed; see the compiler output below.
+  Note: C:\Users\Acer\Videos\EcommerceApi\src\main\java\com\ws101\carpiocebuano
+\ecommerceapi\service\JwtUtil.java uses or overrides a deprecated API.
+  C:\Users\Acer\Videos\EcommerceApi\src\main\java\com\ws101\carpiocebuano\ecomm
+erceapi\config\SecurityConfig.java:98: error: constructor 
+DaoAuthenticationProvider in class DaoAuthenticationProvider cannot be applied 
+to given types;
+          DaoAuthenticationProvider authProvider = new 
+DaoAuthenticationProvider();
+                                                   ^
+    required: UserDetailsService
+    found:    no arguments
+    reason: actual and formal argument lists differ in length
+  Note: Recompile with -Xlint:deprecation for details.
+  C:\Users\Acer\Videos\EcommerceApi\src\main\java\com\ws101\carpiocebuano\ecomm
+erceapi\service\JwtUtil.java:93: error: cannot find symbol
+                  .claims(extraClaims)
+                  ^
+    symbol:   method claims(Map<String,Object>)
+    location: interface JwtBuilder
+  C:\Users\Acer\Videos\EcommerceApi\src\main\java\com\ws101\carpiocebuano\ecomm
+erceapi\config\SecurityConfig.java:99: error: cannot find symbol
+          authProvider.setUserDetailsService(userDetailsService);
+                      ^
+    symbol:   method setUserDetailsService(UserDetailsService)
+    location: variable authProvider of type DaoAuthenticationProvider
+  3 errors
+
+* Try:
+> Check your code and dependencies to fix the compilation error(s)
+> Run with --scan to get full insights from a Build Scan (powered by 
+Develocity).
+
+BUILD FAILED in 18s
+2 actionable tasks: 2 executed
+
