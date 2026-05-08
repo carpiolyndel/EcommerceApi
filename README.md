@@ -1,3 +1,240 @@
+# Lab 10 – JWT Authentication using Spring Boot
+
+## Authors
+- Carpio, Lyndel J.
+- Cebuano, Irene A.
+
+---
+
+# Overview
+
+This laboratory exercise demonstrates the implementation of
+JWT (JSON Web Token) authentication in a Spring Boot
+E-Commerce API application.
+
+The system uses Spring Security together with JWT tokens
+to provide secure and stateless authentication for users.
+
+---
+
+# Objectives
+
+- Implement JWT authentication in Spring Boot
+- Secure API endpoints using Spring Security
+- Generate and validate JWT tokens
+- Apply stateless authentication
+- Protect routes using Authorization headers
+
+---
+
+# Features Implemented
+
+- JWT token generation
+- JWT token validation
+- Stateless session authentication
+- Custom JWT authentication filter
+- Secure login endpoint
+- BCrypt password hashing
+- Protected API routes
+- Spring Security integration
+
+---
+
+# Technologies Used
+
+- Java
+- Spring Boot
+- Spring Security
+- JWT (JJWT)
+- Gradle
+- REST API
+- BCrypt Password Encoder
+
+---
+
+# Dependencies Used
+
+```gradle
+implementation 'org.springframework.boot:spring-boot-starter-security'
+
+implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+
+runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+
+runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+```
+
+---
+
+# JWT Authentication Flow
+
+1. User submits email and password to the login endpoint.
+2. Spring Security authenticates the user.
+3. JWT token is generated after successful authentication.
+4. Client stores the generated token.
+5. Client sends the token using the Authorization header.
+6. JWT filter validates the token before accessing protected routes.
+7. Access is granted if the token is valid.
+
+---
+
+# API Endpoint
+
+## Login Endpoint
+
+```http
+POST /api/auth/login
+```
+
+### Request Body
+
+```json
+{
+  "email": "user@gmail.com",
+  "password": "password123"
+}
+```
+
+### Response
+
+```json
+{
+  "token": "jwt-token-here"
+}
+```
+
+---
+
+# Authorization Header Example
+
+```http
+Authorization: Bearer jwt-token-here
+```
+
+---
+
+# Security Configuration
+
+The application uses:
+
+- Stateless authentication
+- JWT authentication filter
+- BCrypt password encoder
+- Spring Security filter chain
+- Authentication provider
+- Protected API endpoints
+
+---
+
+# Files Created
+
+## Security
+
+- JwtUtil.java
+- JwtAuthenticationFilter.java
+- SecurityConfig.java
+- CustomUserDetailsService.java
+
+## DTOs
+
+- LoginRequest.java
+- LoginResponse.java
+
+## Controller
+
+- AuthController.java
+
+---
+
+# Application Properties
+
+```properties
+jwt.secret=d3MxMDFzdXBlcnNlY3JldGtleTEyMzQ1Njc4OTAxMjM0NTY=
+jwt.expiration=86400000
+```
+
+---
+
+# Sample Fetch Request
+
+```javascript
+async function login(email, password) {
+
+    const response = await fetch(
+        "http://localhost:8080/api/auth/login",
+        {
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                email,
+                password
+            })
+        }
+    );
+
+    const data = await response.json();
+
+    localStorage.setItem("jwt_token", data.token);
+
+    return data;
+}
+```
+
+---
+
+# Sample Protected Request
+
+```javascript
+async function getProducts() {
+
+    const token = localStorage.getItem("jwt_token");
+
+    const response = await fetch(
+        "http://localhost:8080/api/products",
+        {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        }
+    );
+
+    return await response.json();
+}
+```
+
+---
+
+# Testing JWT Authentication
+
+1. Run the Spring Boot application
+2. Send login request using Postman
+3. Copy the generated JWT token
+4. Add token to Authorization header
+5. Access protected endpoints
+
+---
+
+# Running the Application
+
+```bash
+./gradlew bootRun
+```
+
+---
+
+# Conclusion
+
+JWT authentication was successfully implemented in the
+Spring Boot E-Commerce API application.
+
+The system now supports secure and stateless authentication
+using Spring Security and JSON Web Tokens.
+#
+
 Laboratory 9: Securing the API with Sessions & Input Validation
 
 ## Overview
