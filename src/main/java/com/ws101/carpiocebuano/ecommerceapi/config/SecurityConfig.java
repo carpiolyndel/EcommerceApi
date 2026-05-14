@@ -1,5 +1,6 @@
 package com.ws101.carpiocebuano.ecommerceapi.config;
 
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -11,10 +12,11 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
  * Security configuration for the application.
- * Uses session-based authentication with form login.
+ * Uses stateless JWT authentication for protected API endpoints.
  *
  * @author Carpio, Lyndel J.
  * @author Cebuano, Irene A.
@@ -23,6 +25,12 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
+
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+
+    public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter) {
+        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+    }
 
     /**
      * Password encoder using BCrypt for secure password hashing.
@@ -46,7 +54,10 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                // Disable CSRF as we are using stateless JWT authentication
-                .csrf(csrf -> csrf.disable()) 
+                .csrf(AbstractHttpConfigurer::disable)
+
+                // JWT authentication is stateless, so Spring should not create HTTP sessions.
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
                 // Define authorization rules
                 .authorizeHttpRequests(auth -> auth
@@ -56,22 +67,16 @@ public class SecurityConfig {
                         .requestMatchers("/api/products/filter/**").permitAll()
                         .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
                         .requestMatchers("/", "/index.html", "/products.html", "/detail.html").permitAll()
+                        .requestMatchers("/cart.html", "/checkout&shipping.html").permitAll()
                         .requestMatchers("/signup.html", "/register.html", "/account.html").permitAll()
                         .anyRequest().authenticated())
 
-                .formLogin(form -> form
-                        .loginPage("/signup.html")
-                        .loginProcessingUrl("/login")
-                        .defaultSuccessUrl("/", true)
-                        .failureUrl("/signup.html?error=true")
-                        .permitAll())
-
-                .logout(logout -> logout
-                        .logoutUrl("/logout")
-                        .logoutSuccessUrl("/")
-                        .invalidateHttpSession(true)
-                        .deleteCookies("JSESSIONID")
-                        .permitAll());
+                .formLogin(AbstractHttpConfigurer::disable)
+                .httpBasic(AbstractHttpConfigurer::disable)
+                .logout(AbstractHttpConfigurer::disable)
+                .exceptionHandling(ex -> ex.authenticationEntryPoint((request, response, authException) ->
+                        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized")))
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

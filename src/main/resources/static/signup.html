@@ -212,8 +212,7 @@
     </div>
 
     <div id="login-form" class="form active">
-        <form id="login-form-element" action="/login" method="post">
-            <input type="hidden" name="_csrf" id="csrf-token">
+        <form id="login-form-element" onsubmit="return false;">
             <div class="form-group">
                 <label>Username</label>
                 <input type="text" id="login-username" name="username" required placeholder="Enter your username">
@@ -224,7 +223,7 @@
                 <input type="password" id="login-password" name="password" required placeholder="Enter your password">
             </div>
 
-            <button type="submit">Log In</button>
+            <button type="button" id="login-submit-btn">Log In</button>
 
             <div class="switch-link">
                 Don't have an account? <a id="switch-to-signup">Sign up</a>
@@ -321,6 +320,67 @@
     }
 
     // ========================================
+    // LOGIN FUNCTION - saves JWT from backend
+    // ========================================
+    async function loginUser() {
+
+        const username = document.getElementById('login-username').value.trim();
+        const password = document.getElementById('login-password').value;
+
+        if (!username || !password) {
+            showMessage('Please enter username and password', 'error');
+            return;
+        }
+
+        const submitBtn = document.getElementById('login-submit-btn');
+        const originalText = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class="loading"></span> Logging in...';
+
+        try {
+            const response = await fetch('/api/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password })
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.error || 'Invalid username or password');
+            }
+
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('currentUser', JSON.stringify({
+                username: data.username,
+                role: data.role
+            }));
+
+            showMessage('Login successful!', 'success');
+
+            const redirectPath = sessionStorage.getItem('redirectAfterLogin') || '/account.html';
+            sessionStorage.removeItem('redirectAfterLogin');
+
+            setTimeout(() => {
+                window.location.href = redirectPath;
+            }, 1000);
+        } catch (error) {
+            showMessage(error.message || 'Login failed', 'error');
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+        }
+    }
+
+    document.getElementById('login-form-element').addEventListener('submit', function(e) {
+        e.preventDefault();
+        loginUser();
+    });
+
+    document.getElementById('login-submit-btn').addEventListener('click', loginUser);
+
+    // ========================================
     // SIGNUP FUNCTION - calls Spring Security backend
     // ========================================
     document.getElementById('signup-form-element').addEventListener('submit', async function(e) {
@@ -362,8 +422,7 @@
             const response = await fetch('/api/auth/register', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'X-XSRF-TOKEN': window.csrfToken || ''
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ username, password, role })
             });
@@ -387,25 +446,6 @@
             submitBtn.textContent = originalText;
         }
     });
-
-    async function loadCsrfToken() {
-        try {
-            const response = await fetch('/api/auth/csrf');
-            if (!response.ok) {
-                throw new Error('Failed to load CSRF token');
-            }
-            const data = await response.json();
-            const tokenInput = document.getElementById('csrf-token');
-            if (tokenInput) {
-                tokenInput.value = data.token;
-            }
-            window.csrfToken = data.token;
-        } catch (error) {
-            console.error('CSRF token load failed:', error);
-        }
-    }
-
-    loadCsrfToken();
 </script>
 </body>
 </html>

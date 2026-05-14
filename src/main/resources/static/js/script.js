@@ -57,9 +57,10 @@ async function authFetch(url, options = {}) {
     try {
         const requestOptions = { ...options };
         requestOptions.headers = requestOptions.headers || {};
+        const token = localStorage.getItem('token');
 
-        if (window.csrfToken && !requestOptions.headers['X-XSRF-TOKEN']) {
-            requestOptions.headers['X-XSRF-TOKEN'] = window.csrfToken;
+        if (token && !requestOptions.headers['Authorization']) {
+            requestOptions.headers['Authorization'] = `Bearer ${token}`;
         }
 
         const response = await fetch(url, requestOptions);
@@ -97,8 +98,21 @@ async function authFetch(url, options = {}) {
  */
 async function checkAuthStatus() {
     try {
-        const response = await fetch('/api/auth/check');
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+            return false;
+        }
+
+        const response = await fetch('/api/auth/check', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
         if (response.status === 401) {
+            localStorage.removeItem('token');
+            localStorage.removeItem('currentUser');
             return false;
         }
         return response.ok;
@@ -126,13 +140,10 @@ async function protectPage() {
  * Mag-logout ng user
  */
 async function logoutUser() {
-    try {
-        await authFetch('/logout', { method: 'POST' });
-        window.location.href = '/signup.html?logout=true';
-    } catch (error) {
-        console.error('Logout error:', error);
-        window.location.href = '/signup.html';
-    }
+    localStorage.removeItem('token');
+    localStorage.removeItem('currentUser');
+    localStorage.removeItem('refreshToken');
+    window.location.href = '/signup.html?logout=true';
 }
 
 // ========================================
@@ -734,7 +745,8 @@ const defaultOrderHistory = [
 
 function initAccountPage() {
     const welcomeMessage = document.getElementById('welcome-message');
-    if (welcomeMessage) welcomeMessage.textContent = `Welcome, Lyndel Carpio!`;
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+    if (welcomeMessage) welcomeMessage.textContent = `Welcome, ${currentUser?.username || 'User'}!`;
 
     let orderHistory = JSON.parse(localStorage.getItem('orderHistory'));
 
